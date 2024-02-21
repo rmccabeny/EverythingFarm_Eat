@@ -26,17 +26,22 @@ a, .btn-link {
      word-break: break-all;
  }
 
- em {
-     color: #ff00bb;
- }
+
  
 
  h4 {
      margin-top: 150px;
      font-weight: 800;
-     font-family: 'Lucida Handwriting';
+     font-family: 'Lucida Handwriting', sans-serif;
      font-size: xx-large;
  }
+
+h5 {
+    font-family: 'Lucida Handwriting', sans-serif;
+    color: #a32298;
+    background-color: #fff;
+    
+}
 
  
 
@@ -62,7 +67,7 @@ h1 {
     font-family: 'Lucida Handwriting', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bolder;
     font-size: 48px;
-    color: #5815a4;
+    color: #fff;
 }
 
 h1:focus {
@@ -74,12 +79,13 @@ h3 {
     font-family: 'Segoe UI', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
     font-size: 36px;
-    color: #a32298;
+    color: #fff;
 }
 
 .about p {
     margin-top: 50px;
 }
+
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
@@ -113,14 +119,14 @@ h3 {
 img {
     margin: auto;
     margin-top: 50px;
+    
 }
 
 p {
-    
     text-align: center;
-    color: #0026ff;
-    font-weight:550;
-    font-size: large;  
+    color: #56206f;
+    font-weight: 550;
+    font-size: large;
     margin: -5px 150px 150px 200px;
 }
 
