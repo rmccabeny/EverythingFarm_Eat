@@ -34,6 +34,7 @@ a, .btn-link {
      font-weight: 800;
      font-family: 'Lucida Handwriting', sans-serif;
      font-size: xx-large;
+     color: #4800ff;
  }
 
 h5 {
@@ -87,6 +88,8 @@ h3 {
 }
 
 
+
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
@@ -116,6 +119,10 @@ h3 {
 @media only screen and (max-width: 760px) {
 }
 
+em {
+    color: #ff00dc
+}
+
 img {
     margin: auto;
     margin-top: 50px;
@@ -127,6 +134,13 @@ p {
     color: #56206f;
     font-weight: 550;
     font-size: large;
-    margin: -5px 150px 150px 200px;
+    margin: 150px 150px 150px 200px;
+    
+    margin-left:auto;
+    margin-right: auto;
+}
+
+section {
+   background-color: #ff00dc
 }
 
