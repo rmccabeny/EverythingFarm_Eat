@@ -30,11 +30,11 @@ a, .btn-link {
  
 
  h4 {
-     margin-top: 150px;
+     margin-top: 50px;
      font-weight: 800;
      font-family: 'Lucida Handwriting', sans-serif;
      font-size: xx-large;
-     color: #4800ff;
+     color: #fff;
  }
 
 h5 {
@@ -119,6 +119,10 @@ h3 {
 @media only screen and (max-width: 760px) {
 }
 
+.card restaurant {
+    background-color: #a32298;
+}
+
 em {
     color: #ff00dc
 }
@@ -140,7 +144,9 @@ p {
     margin-right: auto;
 }
 
-section {
-   background-color: #ff00dc
+#wrapper {
+    position: absolute;
+    top: 200px;
+    margin-right: 100px;
+    right: 0;
 }
-
