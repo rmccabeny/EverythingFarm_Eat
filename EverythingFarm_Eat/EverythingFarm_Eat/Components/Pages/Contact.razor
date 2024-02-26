@@ -1,8 +1,11 @@
 ﻿@page "/contact"
 @page "/contact/{CustomerId:int}"
+
 @using EverythingFarm_Eat.Components.Models
 @using System.ComponentModel.DataAnnotations
 @using System.Text.RegularExpressions;
+@using System.Net;
+@using System.Net.Mail;
 @inject NavigationManager NavigationManager
 
 <h4>Contact Us</h4>
@@ -14,7 +17,7 @@
 </div>
 
 
-<EditForm Model="@customer" OnValidSubmit="@HandleSubmit" FormName="Contact">
+<EditForm Model="customer" OnValidSubmit="@HandleSubmit" FormName="Contact">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="container">
@@ -64,12 +67,35 @@
 
 @code {
     Customer customer = new Customer();
+    bool formSubmittedSuccessfully = false;
+    bool showDialog = false;
 
     // setting client's email
-    string clientEmail = "@gmail.com"
+    string clientEmail = "Ematthews69@theeverythingfarmeatery.com";
 
-    private void HandleSubmit()
+    private async Task HandleSubmit()
     {
-        
+    
+    
+
+       
+
+        formSubmittedSuccessfully = true;
+
+        showDialog = true;
+    }
+
+    void CloseDialog()
+    {
+        // close the dialog box
+        showDialog = false;
+    }
+
+    private async Task SendEmailNotificationToClient(string recipientEmail)
+    {
+            string emailSubject = "New Contact Form Submission";
+            string emailBody = "Hello,\n\nYou have received a new contact form submission.";
+
+
     }
 }
