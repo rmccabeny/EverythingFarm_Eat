@@ -1,9 +1,75 @@
 ﻿@page "/contact"
-
+@page "/contact/{CustomerId:int}"
+@using EverythingFarm_Eat.Components.Models
+@using System.ComponentModel.DataAnnotations
+@using System.Text.RegularExpressions;
 @inject NavigationManager NavigationManager
 
 <h4>Contact Us</h4>
+<h5 class="bg-white d-inline-block">Please register or login before sending us your information</h5>
+
+<div class="align-content-md-between">
+    <a class="btn btn-primary" href="register_login" role="button">Register</a>
+    <a class="btn btn-primary" href="register_login" role="button">Login</a>
+</div>
+
+
+<EditForm Model="@customer" OnValidSubmit="@HandleSubmit" FormName="Contact">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-3 p-1">
+                <label>First Name</label>
+            </div>
+            <div class="col col-md-4 p-1">
+                <InputText @bind-Value="@customer.FirstName" />
+                <ValidationMessage For="@(() => customer.FirstName)" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-3 p-1">
+            <label>Last Name</label>
+        </div>
+        <div class="col col-md-4 p1">
+            <InputText @bind-Value="@customer.LastName" />
+            <ValidationMessage For="@(() => customer.LastName)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-3 p-1">
+            <label>Email</label>
+        </div>
+        <div class="col col-md-4 p1">
+            <InputText @bind-Value="@customer.Email" />
+            <ValidationMessage For="@(() => customer.Email)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-3 p-1">
+            <label>Phone Number</label>
+        </div>
+        <div class="col col-md-4 p1">
+            <InputText @bind-Value="@customer.PhoneNum" />
+            <ValidationMessage For="@(() => customer.PhoneNum)" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+
+
+
 
 @code {
+    Customer customer = new Customer();
 
+    // setting client's email
+    string clientEmail = "@gmail.com"
+
+    private void HandleSubmit()
+    {
+        
+    }
 }
