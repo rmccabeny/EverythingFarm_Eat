@@ -12,7 +12,7 @@
         public required string City { get; set; }
         public required string State { get; set; }
         public required string ZipCode { get; set;}
-        public string ClientEmail { get; set;}
+        public required string ClientEmail { get; set;}
 
        
     }

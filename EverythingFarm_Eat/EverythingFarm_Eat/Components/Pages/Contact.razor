@@ -1,101 +1,194 @@
 ﻿@page "/contact"
-@page "/contact/{CustomerId:int}"
 
-@using EverythingFarm_Eat.Components.Models
-@using System.ComponentModel.DataAnnotations
-@using System.Text.RegularExpressions;
-@using System.Net;
-@using System.Net.Mail;
+
+
 @inject NavigationManager NavigationManager
 
+
 <h4>Contact Us</h4>
-<h5 class="bg-white d-inline-block">Please register or login before sending us your information</h5>
 
-<div class="align-content-md-between">
-    <a class="btn btn-primary" href="register_login" role="button">Register</a>
-    <a class="btn btn-primary" href="register_login" role="button">Login</a>
+<div class="container col d-flex justify-content-center">
+
+
+
+
+
+
+
+
 </div>
-
-
-<EditForm Model="customer" OnValidSubmit="@HandleSubmit" FormName="Contact">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="container">
+<div class="card opacity-75">
+    <div class="card-header bg-primary text-white " >
+        Contact Information
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Hours of operation and ways to reach us </h5>
         <div class="row">
-            <div class="col col-md-3 p-1">
-                <label>First Name</label>
+            <p class="card-text">
+                Monday - Saturday 8:30 am - 8:00 pm Sunday 9:00 am - 7:00 pm <b>Open 7 days a week.</b><br />
+                Call us at 607-203-1658<br />
+                           Fax 607-203-1696<br />
+                or email us at: <a href="mailto:"EMatthews69@theeverythingfarmeatery.com">EMatthews69@theeverythingfarmeatery.com</a>. You can also use the convenient contact form below!
+            </p>
+
+        </div>
+       
+        
+        
+    </div>
+    <div class="card-footer text-muted">
+        The Everything Farm & Eatery, LLC.
+    </div>
+</div>
+<br />
+
+<div class="card mx-auto opacity-75" style="width: 65rem;">
+    <div class="card-body justify-content-center">
+       <h5>Contact Us</h5>
+                  
+    <form class="row g-3" id="contact" action="https://formspree.io/f/mpzvroad" method="post">
+        <div class="col-md-4">
+            <label for="firstName" class="form-label">First Name:</label>
+            <input type="text" class="form-control" id="firstName">
             </div>
-            <div class="col col-md-4 p-1">
-                <InputText @bind-Value="@customer.FirstName" />
-                <ValidationMessage For="@(() => customer.FirstName)" />
+
+            <div class="col-md-4">
+                <label for="lastName" class="form-label">Last Name:</label>
+                <input type="text" class="form-control" id="lastName">
             </div>
-        </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="streetAddress" class="form-label">Street Address:</label>
+                    <input type="text" class="form-control" id="streetAddress" placeholder="1234 Main St">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="address2" class="form-label">Address 2:</label>
+                    <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="city" class="form-label">City:</label>
+                    <input type="text" class="form-control" id="city">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="state" class="form-label">State</label>
+                    <select id="state" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                        <option>Alabama</option>
+                        <option>Alaska</option>
+                        <option>Arizona</option>
+                        <option>Arkansas</option>
+                        <option>California</option>
+                        <option>Colorado</option>
+                        <option>Connecticut</option>
+                        <option>Delaware</option>
+                        <option>Florida</option>
+                        <option>Georgia</option>
+                        <option>Hawaii</option>
+                        <option>Idaho</option>
+                        <option>Illinois</option>
+                        <option>Indiana</option>
+                        <option>Iowa</option>
+                        <option>Kansas</option>
+                        <option>Kentucky</option>
+                        <option>Louisiana</option>
+                        <option>Maine</option>
+                        <option>Maryland</option>
+                        <option>Massachusetts</option>
+                        <option>Michigan</option>
+                        <option>Minnesota</option>
+                        <option>Mississippi</option>
+                        <option>Missouri</option>
+                        <option>Montana</option>
+                        <option>Nebraska</option>
+                        <option>Nevada</option>
+                        <option>New Hampshire</option>
+                        <option>New Jersey</option>
+                        <option>New Mexico</option>
+                        <option>New York</option>
+                        <option>North Carolina</option>
+                        <option>North Dakota</option>
+                        <option>Ohio</option>
+                        <option>Oklahoma</option>
+                        <option>Oregon</option>
+                        <option>Pennsylvania</option>
+                        <option>Rhode Island</option>
+                        <option>South Carolina</option>
+                        <option>South Dakota</option>
+                        <option>Tennessee</option>
+                        <option>Texas</option>
+                        <option>Utah</option>
+                        <option>Vermont</option>
+                        <option>Virginia</option>
+                        <option>Washington</option>
+                        <option>Washington D.C.</option>
+                        <option>West Virginia</option>
+                        <option>Wisconson</option>
+                        <option>Wyoming</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label for="zipCode" class="form-label">Zip Code:</label>
+                    <input type="text" class="form-control" id="zipCode">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="reservationDate" class="form-label">Reservation Date:</label>
+                    <input type="date" class="form-control" id="reservationDate" placeholder="MM/dd/yyyy">
+                </div>
+                <div class="col-md-2">
+                    <label for="reservationTime" class="form-label">Request Time:</label>
+                    <input type="time" class="form-control" id="reservationTime" placeholder="HH:mm">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                        Make Reservation
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="message" class="form-label">Message:</label>
+                <input textarea type="text" class="form-control" id="message" placeholder="How can we help you today?">
+            </div>
+        </form>
     </div>
-    <div class="row">
-        <div class="col col-md-3 p-1">
-            <label>Last Name</label>
-        </div>
-        <div class="col col-md-4 p1">
-            <InputText @bind-Value="@customer.LastName" />
-            <ValidationMessage For="@(() => customer.LastName)" />
-        </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+   
+
     </div>
-    <div class="row">
-        <div class="col col-md-3 p-1">
-            <label>Email</label>
-        </div>
-        <div class="col col-md-4 p1">
-            <InputText @bind-Value="@customer.Email" />
-            <ValidationMessage For="@(() => customer.Email)" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col col-md-3 p-1">
-            <label>Phone Number</label>
-        </div>
-        <div class="col col-md-4 p1">
-            <InputText @bind-Value="@customer.PhoneNum" />
-            <ValidationMessage For="@(() => customer.PhoneNum)" />
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</EditForm>
+
+
+        
+
+
+
+
+
 
 
 
 
 
 @code {
-    Customer customer = new Customer();
-    bool formSubmittedSuccessfully = false;
-    bool showDialog = false;
-
-    // setting client's email
-    string clientEmail = "Ematthews69@theeverythingfarmeatery.com";
-
-    private async Task HandleSubmit()
-    {
-    
-    
-
-       
-
-        formSubmittedSuccessfully = true;
-
-        showDialog = true;
-    }
-
-    void CloseDialog()
-    {
-        // close the dialog box
-        showDialog = false;
-    }
-
-    private async Task SendEmailNotificationToClient(string recipientEmail)
-    {
-            string emailSubject = "New Contact Form Submission";
-            string emailBody = "Hello,\n\nYou have received a new contact form submission.";
-
-
-    }
+   
 }
