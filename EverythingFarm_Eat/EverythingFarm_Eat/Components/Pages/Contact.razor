@@ -1,40 +1,29 @@
 ﻿@page "/contact"
 
-
-
+@using EverythingFarm_Eat.Components.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using EverythingFarm_Eat.Services
+@using System.Threading.Tasks
+@inject IEmailService EmailService
 @inject NavigationManager NavigationManager
-
 
 <h4>Contact Us</h4>
 
-<div class="container col d-flex justify-content-center">
-
-
-
-
-
-
-
-
-</div>
 <div class="card opacity-75">
-    <div class="card-header bg-primary text-white " >
+    <div class="card-header bg-primary text-white">
         Contact Information
     </div>
     <div class="card-body">
-        <h5 class="card-title">Hours of operation and ways to reach us </h5>
+        <h5 class="card-title">Hours of operation and ways to reach us</h5>
         <div class="row">
             <p class="card-text">
                 Monday - Saturday 8:30 am - 8:00 pm Sunday 9:00 am - 7:00 pm <b>Open 7 days a week.</b><br />
                 Call us at 607-203-1658<br />
-                           Fax 607-203-1696<br />
-                or email us at: <a href="mailto:"EMatthews69@theeverythingfarmeatery.com">EMatthews69@theeverythingfarmeatery.com</a>. You can also use the convenient contact form below!
+                Fax 607-203-1696<br />
+                or email us at: <a href="mailto:ematthews69@theeverythingfarmeatery.com">ematthews69@theeverythingfarmeatery.com .</a>
+                You can also use the convenient contact form below!
             </p>
-
         </div>
-       
-        
-        
     </div>
     <div class="card-footer text-muted">
         The Everything Farm & Eatery, LLC.
@@ -42,24 +31,164 @@
 </div>
 <br />
 
+<EditForm Model="@contactForm" OnValidSubmit="@HandleValidSubmit" FormName="ContactForm" \>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <InputText id="firstName" class="form-control" @bind-Value="@contactForm.FirstName" placeholder="First Name"/>
+                <ValidationMessage For="@(() => contactForm.FirstName)" />
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <InputText id="lastName" class="form-control" @bind-Value="@contactForm.LastName" placeholder="Last Name" />
+                <ValidationMessage For="@(() => contactForm.LastName)" />
+            </div>          
+         </div>
+    </div>  
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <InputText id="email" class="form-control" @bind-Value="@contactForm.Email" placeholder="me@me.com"/>
+                <ValidationMessage For="@(() => contactForm.Email)" />
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <InputText id="phone" class="form-control" @bind-Value="@contactForm.Phone" placeholder="(___)___-____"/>
+                <ValidationMessage For="@(() => contactForm.Phone)" />
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="reservationDateTime">Reservation Date and Time:</label>
+                <!-- Use the value attribute to bind the formatted date -->
+                <input type="datetime-local" id="reservationDateTime" class="form-control"
+                       value="@contactForm.ReservationDateTime.ToString("yyyy-MM-ddTHH:mm")"
+                       @onchange="(e => contactForm.ReservationDateTime = DateTime.Parse(contactForm.ReservationDateTime.ToString()))"; />
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Subject</label>
+                <InputText id="subject" class="form-control" @bind-Value="@contactForm.Subject" placeholder="subject"/>
+                <ValidationMessage For="@(() => contactForm.Subject)" />
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Message:</label>
+                <InputTextArea id="message" class="form-control" @bind-Value="@contactForm.Message" placeholder="Enter your message here."/>
+                <ValidationMessage For="@(() => contactForm.Message)" />
+            </div>
+        </div>
+    </div>
+    <div class="d-grid d-md-flex justify-content-md-center">
+        <button type="submit" class="btn btn-primary mx-auto">Submit</button>
+    </div>
     
-
-        
-
-
-
-
-
-
-
-
-
+</EditForm>
 
 @code {
+    
+
+    private ContactForm contactForm = new ContactForm
+    {
+        FirstName = string.Empty,
+        LastName = string.Empty,
+        Email = string.Empty,
+        Phone = string.Empty,
+        StreetAddr = string.Empty,
+        Addr2 = string.Empty,
+        City = string.Empty,
+        State = string.Empty,
+        ZipCode = string.Empty,
+        ReservationDateTime = DateTime.UtcNow,
+        Subject = string.Empty,
+        Message = string.Empty
+    
+    
+    };
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await HandleFormSubmission(
+                contactForm.FirstName,
+                contactForm.LastName,
+                contactForm.Email,
+                contactForm.Phone,
+                contactForm.ReservationDateTime,
+                contactForm.Subject?? "",
+                contactForm.Message,
+                contactForm.Email
+                
+            );
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error submitting form: {ex.Message}");
+        }
+    }
+
+    private async Task HandleFormSubmission(
+        string firstName,
+        string lastName,
+        string email,
+        string phone,
+        DateTime reservationDateTime,
+        string subject,
+        string message,
+        string fromEmail)
+    {
+        await EmailService.SendEmailAsync(
+            fromEmail,
+            "ematthews69@theeverythingfarmeatery.com",
+            "New contact form submission",
+            $"Name: {firstName} {lastName}\n" +
+            $"Email: {email}\n" +
+            $"Phone: {phone}\n" +
+            $"Reservation Date and Time: {reservationDateTime}\n" +
+            $"Subject: {subject}\n" +
+            $"Message: {message}"
+        );
+
+        await ClearMessage();
+
+        async Task ClearMessage()
+        {
+            await Task.Delay(3000);
+            message = string.Empty;
+        }
+    }
+}
+
+
+
+
+
 
     
+
+
+    
+
    
-           
-}

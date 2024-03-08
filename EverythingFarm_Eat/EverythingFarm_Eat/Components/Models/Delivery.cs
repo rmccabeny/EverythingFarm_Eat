@@ -1,4 +1,6 @@
-﻿namespace EverythingFarm_Eat.Components.Models
+﻿
+
+namespace EverythingFarm_Eat.Components.Models
 {
     public record Delivery
     {

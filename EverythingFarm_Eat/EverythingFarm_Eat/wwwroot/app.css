@@ -26,7 +26,9 @@
             word-break: break-all;
         }
 
-
+    .form-control {
+        margin: auto;
+    }
 
     .fixed_width {
         height: 260px;
@@ -52,11 +54,12 @@
         font-weight: bold;
         font-size: 36px;
         color: #631a58;
+        
     }
 
 
     h4 {
-        margin-top: 50px;
+        margin-top: 30px;
         font-weight: 800;
         font-family: 'Lucida Handwriting', sans-serif;
         font-size: xx-large;
@@ -126,8 +129,6 @@
         opacity: inherit;
         align-content: center;
         
-        
-
     }
 
 

@@ -1,17 +1,26 @@
+using Azure.Communication.Email;
 using EverythingFarm_Eat.Components;
+using EverythingFarm_Eat.Services;
 using Microsoft.Extensions.DependencyInjection;
-
-
-
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddSingleton<EmailClient>(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var emailSettings = configuration.GetSection("EmailSettings");
+    var endpoint = emailSettings["ConnectionString"];
+    var connectionString = endpoint;
+    return new EmailClient(connectionString);
+});
+
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();
 
@@ -34,7 +43,8 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(EverythingFarm_Eat.Client._Imports).Assembly);
+    .AddInteractiveWebAssemblyRenderMode();
+    
 
 app.Run();
+
