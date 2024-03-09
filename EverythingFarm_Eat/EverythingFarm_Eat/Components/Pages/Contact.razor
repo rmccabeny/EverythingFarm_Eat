@@ -16,20 +16,22 @@
     <div class="card-body">
         <h5 class="card-title">Hours of operation and ways to reach us</h5>
         <div class="row">
-            <p class="card-text">
+            <div class="card-text text-black">
+                We are located at 93 Pierce Creek Rd. Binghamton, NY 13903
+            <br />
                 Monday - Saturday 8:30 am - 8:00 pm Sunday 9:00 am - 7:00 pm <b>Open 7 days a week.</b><br />
                 Call us at 607-203-1658<br />
                 Fax 607-203-1696<br />
                 or email us at: <a href="mailto:ematthews69@theeverythingfarmeatery.com">ematthews69@theeverythingfarmeatery.com .</a>
                 You can also use the convenient contact form below!
-            </p>
+            </div>
         </div>
     </div>
     <div class="card-footer text-muted">
         The Everything Farm & Eatery, LLC.
     </div>
 </div>
-<br />
+
 
 <EditForm Model="@contactForm" OnValidSubmit="@HandleValidSubmit" FormName="ContactForm" \>
     <DataAnnotationsValidator />
@@ -75,7 +77,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="reservationDateTime">Reservation Date and Time:</label>
-                <!-- Use the value attribute to bind the formatted date -->
+                
                 <input type="datetime-local" id="reservationDateTime" class="form-control"
                        value="@contactForm.ReservationDateTime.ToString("yyyy-MM-ddTHH:mm")"
                        @onchange="(e => contactForm.ReservationDateTime = DateTime.Parse(contactForm.ReservationDateTime.ToString()))"; />
