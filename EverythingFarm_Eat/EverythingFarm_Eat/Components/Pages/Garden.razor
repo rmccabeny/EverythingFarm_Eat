@@ -1,5 +1,13 @@
 ﻿@page "/garden"
 
+@using EverythingFarm_Eat.Components.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using EverythingFarm_Eat.Services
+@using System.Threading.Tasks
+
+
+@inject IEmailService emailService
+
 @inject NavigationManager NavigationManager
 <h4>Garden</h4>
 <h4 class="text-warning">Shop here for seedlings and special gifts!</h4>
@@ -35,6 +43,189 @@
     </div>
 </div>
 
-@code {
+<div class="row mx-auto">
+    <div class="col col-md-12">
+        <EditForm Model="@customerForm" OnValidSubmit="@HandleValidSubmit" FormName ="CustomerForm">
+            <DataAnnotationsValidator/>
+            <ValidationSummary />
 
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <label>First Name:</label>
+                    <InputText id="firstName" class="form-control" @bind-Value="@customerForm.FirstName" placholder="First Name" />
+                    <ValidationMessage For="@(() => customerForm.FirstName)" />
+                </div>
+                <div class="col-md-6">
+                    <label>Last Name:</label>
+                    <InputText id="lastName" class="form-control" @bind-Value="@customerForm.LastName" placeholder="Last Name" />
+                    <ValidationMessage For="@(() => customerForm.lastName)" />
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <label>Email:</label>
+                    <InputText id="email" class="form-control" @bind-Value="@customerForm.Email" placeholder="Email Address" />
+                    <ValidationMessage For="@(() => customerForm.Email)" />
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <label>Street Address:</label>
+                    <InputText id="streetAddress" class="form-control" @bind-Value="customerForm.StreetAddress" placeholder="Street Address" />
+                    <ValidationMessage For="@(() => customerForm.StreetAddress)" />
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <label>Address 2:</label>
+                    <InputText id="address2" class="form-control" @bind-Value="customerForm.Address2" placeholder="Address 2" />
+                    <ValidationMessage For="@(() => customerForm.Address2)" />
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <label>City:</label>
+                    <InputText id="city" class="form-control" @bind-Value="customerForm.City" placeholder="City" />
+                    <ValidationMessage For="@(() => customerForm.City)" />
+                </div>
+                <div class="col-md-6">
+                    <label>State:</label>
+                    <InputSelect id="state" class="form-select" @bind-Value="customerForm.State"/>
+                        <option>Choose...</option>
+                        <option>...</option>
+                        <option>Alabama</option>
+                        <option>Alaska</option>
+                        <option>Arizona</option>
+                        <option>Arkansas</option>
+                        <option>California</option>
+                        <option>Colorado</option>
+                        <option>Connecticut</option>
+                        <option>Delaware</option>
+                        <option>Florida</option>
+                        <option>Georgia</option>
+                        <option>Hawaii</option>
+                        <option>Idaho</option>
+                        <option>Illinois</option>
+                        <option>Indiana</option>
+                        <option>Iowa</option>
+                        <option>Kansas</option>
+                        <option>Kentucky</option>
+                        <option>Louisiana</option>
+                        <option>Maine</option>
+                        <option>Maryland</option>
+                        <option>Massachusetts</option>
+                        <option>Michigan</option>
+                        <option>Minnesota</option>
+                        <option>Mississippi</option>
+                        <option>Missouri</option>
+                        <option>Montana</option>
+                        <option>Nebraska</option>
+                        <option>Nevada</option>
+                        <option>New Hampshire</option>
+                        <option>New Jersey</option>
+                        <option>New Mexico</option>
+                        <option>New York</option>
+                        <option>North Carolina</option>
+                        <option>North Dakota</option>
+                        <option>Ohio</option>
+                        <option>Oklahoma</option>
+                        <option>Oregon</option>
+                        <option>Pennsylvania</option>
+                        <option>Rhode Island</option>
+                        <option>South Carolina</option>
+                        <option>South Dakota</option>
+                        <option>Tennessee</option>
+                        <option>Texas</option>
+                        <option>Utah</option>
+                        <option>Vermont</option>
+                        <option>Virginia</option>
+                        <option>Washington</option>
+                        <option>Washington D.C.</option>
+                        <option>West Virginia</option>
+                        <option>Wisconson</option>
+                        <option>Wyoming</option>
+                    <ValidationMessage For="@(() => customerForm.State)" />
+                </div>
+                <div class="col-md-6">
+                    <label>Zip Code:</label>
+                    <InputText id="zipCode" class="form-control" @bind-Value="customerForm.ZipCode" placeholder="Zip Code" />
+                    <ValidationMessage For="@(() => customerForm.ZipCode)" />
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <label>Seedlings
+                           <InputCheckbox @bind-Value="customerForm.Item" />
+                    </label>
+                    <label>Jewlery 
+                        <InputCheckbox @bind-Value="customerForm.Item" />
+                    </label>
+      
+                    
+                </div>
+            </div>
+            
+
+
+        </EditForm>
+
+
+
+
+
+    </div>
+
+
+</div>
+
+
+@code {
+    private CustomerForm customerForm = new CustomerForm
+        {
+            FirstName = string.Empty,
+            LastName = string.Empty,
+            Email = string.Empty,
+            StreetAddress = string.Empty,
+            Address2 = string.Empty,
+            City = string.Empty,
+            State = string.Empty,
+            ZipCode = string.Empty,
+            Item = string.Empty,
+            Price = decimal.Zero,
+            Quantity = int.MinValue,
+            Message = string.Empty
+
+        };
+
+    private async Task HandleValidSubmit()
+    {
+
+        try
+        {
+            await HandleFormSubmission(
+                customerForm.FirstName,
+                customerForm.LastName,
+                customerForm.Email,
+                customerForm.StreetAddress,
+                customerForm.Address2,
+                customerForm.City,
+                customerForm.State,
+                customerForm.ZipCode,
+                customerForm.Item,
+                customerForm.Price,
+                customerForm.Quantity,
+                customerForm.Total,
+                customerForm.Message
+            );
+
+
+
+        }
+
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error submitting form: {ex.Message}");
+        }
+
+    }
 }
