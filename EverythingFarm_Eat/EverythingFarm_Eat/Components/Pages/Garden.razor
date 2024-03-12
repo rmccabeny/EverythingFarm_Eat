@@ -4,15 +4,13 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using EverythingFarm_Eat.Services
 @using System.Threading.Tasks
-
-
 @inject IEmailService emailService
-
 @inject NavigationManager NavigationManager
+
 <h4>Garden</h4>
 <h4 class="text-warning">Shop here for seedlings and special gifts!</h4>
 
-<div class="card mb-3 opacity-75" style="max-width: 540px;">
+<div class="card mb-4 opacity-75" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
             <img src="..." class="img-fluid rounded-start" alt="...">
@@ -20,15 +18,16 @@
         <div class="col-md-8">
             <div class="card-body bg-success">
                 <h5 class="card-title text-warning">Seedlings</h5>
-                <p class="card-text text-light">Start or make your garden even more beautiful with our high quality seedlings. We have a wide variety of choices.
-                                                Bring the wonders of nature into your life!
+                <p class="card-text text-light">
+                    Start or make your garden even more beautiful with our high quality seedlings. We have a wide variety of choices.
+                    Bring the wonders of nature into your life!
                 </p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
     </div>
 </div>
-<div class="card mb-3 opacity-75" style="max-width: 540px;">
+<div class="card mb- opacity-75" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
             <img src="..." class="img-fluid rounded-start" alt="...">
@@ -43,56 +42,59 @@
     </div>
 </div>
 
-<div class="row mx-auto">
-    <div class="col col-md-12">
-        <EditForm Model="@customerForm" OnValidSubmit="@HandleValidSubmit" FormName ="CustomerForm">
-            <DataAnnotationsValidator/>
-            <ValidationSummary />
 
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6">
+    <div class="col-md-12 d-flex justify-content-md-end">
+        <EditForm Model="@customerForm" OnValidSubmit="@HandleValidSubmit" FormName="CustomerForm" style="padding: 1rem; margin-top: -65rem; margin-right: -20m;">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        
+        <h5 class="text-center">Order Form</h5>
+        <br />
+        <div class="row">
+                <div class="col-md-4">
                     <label>First Name:</label>
-                    <InputText id="firstName" class="form-control" @bind-Value="@customerForm.FirstName" placholder="First Name" />
+                    <InputText id="firstName" class="form-control" @bind-Value="@customerForm.FirstName" placeholder="First Name" />
                     <ValidationMessage For="@(() => customerForm.FirstName)" />
                 </div>
-                <div class="col-md-6">
+
+                <div class="col-md-4">
                     <label>Last Name:</label>
                     <InputText id="lastName" class="form-control" @bind-Value="@customerForm.LastName" placeholder="Last Name" />
-                    <ValidationMessage For="@(() => customerForm.lastName)" />
+                    <ValidationMessage For="@(() => customerForm.LastName)" />
                 </div>
-            </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6">
+        </div>
+            
+            <div class="row d-flex justify-content-left">
+                <div class="col-md-4">
                     <label>Email:</label>
                     <InputText id="email" class="form-control" @bind-Value="@customerForm.Email" placeholder="Email Address" />
                     <ValidationMessage For="@(() => customerForm.Email)" />
                 </div>
             </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6">
+            <div class="row d-flex justify-content-left">
+                <div class="col-md-4">
                     <label>Street Address:</label>
                     <InputText id="streetAddress" class="form-control" @bind-Value="customerForm.StreetAddress" placeholder="Street Address" />
                     <ValidationMessage For="@(() => customerForm.StreetAddress)" />
                 </div>
             </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6">
+            <div class="row d-flex justify-content-left">
+                <div class="col-md-4">
                     <label>Address 2:</label>
                     <InputText id="address2" class="form-control" @bind-Value="customerForm.Address2" placeholder="Address 2" />
                     <ValidationMessage For="@(() => customerForm.Address2)" />
                 </div>
             </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6">
+            <div class="row d-flex justify-content-left">
+                <div class="col-md-4">
                     <label>City:</label>
                     <InputText id="city" class="form-control" @bind-Value="customerForm.City" placeholder="City" />
                     <ValidationMessage For="@(() => customerForm.City)" />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>State:</label>
-                    <InputSelect id="state" class="form-select" @bind-Value="customerForm.State"/>
+                    <InputSelect id="state" class="form-select" @bind-Value="customerForm.State">
                         <option>Choose...</option>
-                        <option>...</option>
                         <option>Alabama</option>
                         <option>Alaska</option>
                         <option>Arizona</option>
@@ -142,90 +144,159 @@
                         <option>Washington</option>
                         <option>Washington D.C.</option>
                         <option>West Virginia</option>
-                        <option>Wisconson</option>
+                        <option>Wisconsin</option>
                         <option>Wyoming</option>
+                    </InputSelect>
                     <ValidationMessage For="@(() => customerForm.State)" />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>Zip Code:</label>
                     <InputText id="zipCode" class="form-control" @bind-Value="customerForm.ZipCode" placeholder="Zip Code" />
                     <ValidationMessage For="@(() => customerForm.ZipCode)" />
                 </div>
             </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6">
-                    <label>Seedlings
-                           <InputCheckbox @bind-Value="customerForm.Item" />
-                    </label>
-                    <label>Jewlery 
-                        <InputCheckbox @bind-Value="customerForm.Item" />
-                    </label>
-      
-                    
+            <div class="row d-flex justify-content-left">
+                <div class="col-md-4">
+                    <label>Seedlings</label>
+                    <InputCheckbox @bind-Value="customerForm.Item" />
+                </div>
+                <div class="col-md-4">
+                    <label>Jewelry</label>
+                    <InputCheckbox @bind-Value="customerForm.Item" />
                 </div>
             </div>
-            
-
+            <div class="row d-flex justify-content-left">
+                <div class="col-md-4">
+                    <label>Price:</label>
+                    <InputNumber id="price" class="form-control" @bind-Value="customerForm.Price" />
+                    <ValidationMessage For="@(() => customerForm.Price)" />
+                </div>
+                <div class="col-md-4">
+                    <label>Quantity:</label>
+                    <InputNumber id="quantity" class="form-control" @bind-Value="customerForm.Quantity" />
+                    <ValidationMessage For="@(() => customerForm.Quantity)" />
+                </div>
+            </div>
+            <div class="row d-flex justify-content-left">
+                <div class="col-md-4">
+                    <label>Total:</label>
+                    <InputNumber id="total" class="form-control" @bind-Value="customerForm.Total" />
+                    <ValidationMessage For="@(() => customerForm.Total)" />
+                </div>
+            </div>
+            <br />
+        <div class="d-grid d-md-flex justify-content-md-center">
+            <button type="submit" class="btn btn-primary mx-auto">Request</button>
+        </div>
+        <br /><br />
+        <div class="d-grid d-md-flex justify-content-md-center">
+            <img src="/images/The Everything Farm.svg" alt="logo" />
+        </div>
 
         </EditForm>
-
-
-
-
-
-    </div>
-
-
 </div>
 
 
+
+
+
+    
+
+
+
+
+
+    
+        
+    
+
+
 @code {
+    private string fromEmail = "ematthews69@theeverythingfarmeatery.com";
     private CustomerForm customerForm = new CustomerForm
         {
             FirstName = string.Empty,
             LastName = string.Empty,
             Email = string.Empty,
+            Phone = string.Empty,
             StreetAddress = string.Empty,
             Address2 = string.Empty,
             City = string.Empty,
             State = string.Empty,
             ZipCode = string.Empty,
-            Item = string.Empty,
+            Item = false,
             Price = decimal.Zero,
-            Quantity = int.MinValue,
-            Message = string.Empty
-
+            Quantity = 0,
+            Total = decimal.Zero,
+            Subject = string.Empty,
+            Message = string.Empty,
+            ClientEmail = "ematthews69@theeverythingfarmeatery.com"
         };
+
+    private void HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "ArrowUp")
+        {
+            customerForm.Quantity++;
+        }
+        else if (e.Key == "ArrowDown")
+        {
+            if (customerForm.Quantity > 0)
+            {
+                customerForm.Quantity--;
+            }
+        }
+    }
+
 
     private async Task HandleValidSubmit()
     {
-
         try
         {
-            await HandleFormSubmission(
-                customerForm.FirstName,
-                customerForm.LastName,
-                customerForm.Email,
-                customerForm.StreetAddress,
-                customerForm.Address2,
-                customerForm.City,
-                customerForm.State,
-                customerForm.ZipCode,
-                customerForm.Item,
-                customerForm.Price,
-                customerForm.Quantity,
-                customerForm.Total,
-                customerForm.Message
-            );
-
-
-
+            await HandleFormSubmission(customerForm);
         }
-
         catch (Exception ex)
         {
             Console.WriteLine($"Error submitting form: {ex.Message}");
         }
+    }
 
+    private async Task HandleFormSubmission(CustomerForm customerForm)
+    {
+        if (customerForm.ClientEmail is null)
+        {
+            throw new ArgumentNullException(nameof(customerForm.ClientEmail));
+        }
+
+        string message = $"Name: {customerForm.FirstName} {customerForm.LastName}\n" +
+                         $"Email: {customerForm.Email}\n" +
+                         $"Phone: {customerForm.Phone}\n" +
+                         $"Street Address: {customerForm.StreetAddress}\n" +
+                         $"Address 2: {customerForm.Address2}\n" +
+                         $"City: {customerForm.City}\n" +
+                         $"State: {customerForm.State}\n" +
+                         $"Zip Code: {customerForm.ZipCode}\n" +
+                         $"Item: {customerForm.Item}\n" +
+                         $"Price: {customerForm.Price}\n" +
+                         $"Quantity: {customerForm.Quantity}\n" +
+                         $"Total: {customerForm.Total}\n" +
+                         $"Subject: {customerForm.Subject}\n" +
+                         $"Message: {customerForm.Message}";
+
+        await emailService.SendEmailAsync(
+            fromEmail,
+            "ematthews69@theeverythingfarmeatery.com",
+            "new order form submission",
+            message
+        );
+
+        await ClearMessage();
+
+        async Task ClearMessage()
+        {
+            await Task.Delay(3000);
+            customerForm.Message = string.Empty;
+        }
     }
 }
+

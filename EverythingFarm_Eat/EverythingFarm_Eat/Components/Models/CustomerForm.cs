@@ -13,12 +13,13 @@ namespace EverythingFarm_Eat.Components.Models
         public required string City { get; set; }
         public required string State { get; set; }
         public required string ZipCode { get; set;}
-        public required string ClientEmail { get; set;}
+
+        public string? Subject { get; set;}
         public required string Message { get; set;}
         public required bool Item { get; set; }
         public required decimal Price { get; set; }
         public required int Quantity { get; set; }
         public required decimal Total { get; set; }
-        
+        public required string ClientEmail { get; set; }
     }
 }
