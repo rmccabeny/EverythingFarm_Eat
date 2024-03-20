@@ -18,21 +18,7 @@ namespace EverythingFarm_Eat.Components.Models
         
         public required string Phone { get; set; }
 
-        
-        public  string? StreetAddr { get; set; }
-
-        public string? Addr2 { get; set; }
-
-        
-        public string? City { get; set; }
-
-        
-        public required string? State { get; set; }
-
-        
-        public string? ZipCode { get; set; }
-
-        
+         
         public DateTime ReservationDateTime { get; set; }
 
         

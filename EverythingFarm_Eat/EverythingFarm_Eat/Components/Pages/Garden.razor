@@ -7,50 +7,20 @@
 @inject IEmailService emailService
 @inject NavigationManager NavigationManager
 
-<h4>Garden</h4>
-<h4 class="text-warning">Shop here for seedlings and special gifts!</h4>
-
-<div class="card mb-4 opacity-75" style="max-width: 540px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body bg-success">
-                <h5 class="card-title text-warning">Seedlings</h5>
-                <p class="card-text text-light">
-                    Start or make your garden even more beautiful with our high quality seedlings. We have a wide variety of choices.
-                    Bring the wonders of nature into your life!
-                </p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card mb- opacity-75" style="max-width: 540px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body bg-primary">
-                <h5 class="card-title text-light">Gifts For You</h5>
-                <p class="card-text text-light">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-    </div>
-</div>
+<h4>Shop</h4>
+<h4 class="text-warning">Order here for seedlings and special gifts!</h4>
 
 
-    <div class="col-md-12 d-flex justify-content-md-end">
-        <EditForm Model="@customerForm" OnValidSubmit="@HandleValidSubmit" FormName="CustomerForm" style="padding: 1rem; margin-top: -65rem; margin-right: -20m;">
+
+<div class="row d-flex justify-content-left" style="padding: 1rem;">
+    <div class="col-md-12  justify-content-md-center">
+        <EditForm Model="@customerForm" OnValidSubmit="@HandleValidSubmit" FormName="CustomerForm">
             <DataAnnotationsValidator />
             <ValidationSummary />
         
-        <h5 class="text-center">Order Form</h5>
+        <h5 class="text-center" style="padding-top: 1rem;">Order Form</h5>
         <br />
-        <div class="row">
+        <div class="row" style="margin:auto;">
                 <div class="col-md-4">
                     <label>First Name:</label>
                     <InputText id="firstName" class="form-control" @bind-Value="@customerForm.FirstName" placeholder="First Name" />
@@ -64,28 +34,28 @@
                 </div>
         </div>
             
-            <div class="row d-flex justify-content-left">
+            <div class="row d-flex justify-content-left" style="margin: auto;">
                 <div class="col-md-4">
                     <label>Email:</label>
                     <InputText id="email" class="form-control" @bind-Value="@customerForm.Email" placeholder="Email Address" />
                     <ValidationMessage For="@(() => customerForm.Email)" />
                 </div>
             </div>
-            <div class="row d-flex justify-content-left">
+            <div class="row d-flex justify-content-left" style="margin: auto;">
                 <div class="col-md-4">
                     <label>Street Address:</label>
                     <InputText id="streetAddress" class="form-control" @bind-Value="customerForm.StreetAddress" placeholder="Street Address" />
                     <ValidationMessage For="@(() => customerForm.StreetAddress)" />
                 </div>
             </div>
-            <div class="row d-flex justify-content-left">
+            <div class="row d-flex justify-content-left" style="margin: auto;">
                 <div class="col-md-4">
                     <label>Address 2:</label>
                     <InputText id="address2" class="form-control" @bind-Value="customerForm.Address2" placeholder="Address 2" />
                     <ValidationMessage For="@(() => customerForm.Address2)" />
                 </div>
             </div>
-            <div class="row d-flex justify-content-left">
+            <div class="row d-flex justify-content-left" style="margin: auto;">
                 <div class="col-md-4">
                     <label>City:</label>
                     <InputText id="city" class="form-control" @bind-Value="customerForm.City" placeholder="City" />
@@ -95,57 +65,10 @@
                     <label>State:</label>
                     <InputSelect id="state" class="form-select" @bind-Value="customerForm.State">
                         <option>Choose...</option>
-                        <option>Alabama</option>
-                        <option>Alaska</option>
-                        <option>Arizona</option>
-                        <option>Arkansas</option>
-                        <option>California</option>
-                        <option>Colorado</option>
-                        <option>Connecticut</option>
-                        <option>Delaware</option>
-                        <option>Florida</option>
-                        <option>Georgia</option>
-                        <option>Hawaii</option>
-                        <option>Idaho</option>
-                        <option>Illinois</option>
-                        <option>Indiana</option>
-                        <option>Iowa</option>
-                        <option>Kansas</option>
-                        <option>Kentucky</option>
-                        <option>Louisiana</option>
-                        <option>Maine</option>
-                        <option>Maryland</option>
-                        <option>Massachusetts</option>
-                        <option>Michigan</option>
-                        <option>Minnesota</option>
-                        <option>Mississippi</option>
-                        <option>Missouri</option>
-                        <option>Montana</option>
-                        <option>Nebraska</option>
-                        <option>Nevada</option>
-                        <option>New Hampshire</option>
-                        <option>New Jersey</option>
-                        <option>New Mexico</option>
-                        <option>New York</option>
-                        <option>North Carolina</option>
-                        <option>North Dakota</option>
-                        <option>Ohio</option>
-                        <option>Oklahoma</option>
-                        <option>Oregon</option>
-                        <option>Pennsylvania</option>
-                        <option>Rhode Island</option>
-                        <option>South Carolina</option>
-                        <option>South Dakota</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Utah</option>
-                        <option>Vermont</option>
-                        <option>Virginia</option>
-                        <option>Washington</option>
-                        <option>Washington D.C.</option>
-                        <option>West Virginia</option>
-                        <option>Wisconsin</option>
-                        <option>Wyoming</option>
+                        @foreach (var states in StateHelper.GetStates())
+                        {
+                            <option value="@states">@states</option>
+                        }
                     </InputSelect>
                     <ValidationMessage For="@(() => customerForm.State)" />
                 </div>
@@ -155,33 +78,45 @@
                     <ValidationMessage For="@(() => customerForm.ZipCode)" />
                 </div>
             </div>
-            <div class="row d-flex justify-content-left">
+            <br />
+            <div class="row d-flex justify-content-left" style="margin:auto;">
                 <div class="col-md-4">
                     <label>Seedlings</label>
                     <InputCheckbox @bind-Value="customerForm.Item" />
                 </div>
+            <div class="row d-flex justify-content-left" style="margin: auto;">
                 <div class="col-md-4">
-                    <label>Jewelry</label>
-                    <InputCheckbox @bind-Value="customerForm.Item" />
+                    <label style="margin-left:-10px;">Earrings</label>
+                    <InputCheckbox @bind-Value="customerForm.Item"/>
                 </div>
             </div>
-            <div class="row d-flex justify-content-left">
-                <div class="col-md-4">
-                    <label>Price:</label>
-                    <InputNumber id="price" class="form-control" @bind-Value="customerForm.Price" />
-                    <ValidationMessage For="@(() => customerForm.Price)" />
-                </div>
+                
+            </div>
+            <div class="row d-flex justify-content-left" style="margin: auto;">
+               
                 <div class="col-md-4">
                     <label>Quantity:</label>
                     <InputNumber id="quantity" class="form-control" @bind-Value="customerForm.Quantity" />
                     <ValidationMessage For="@(() => customerForm.Quantity)" />
                 </div>
-            </div>
-            <div class="row d-flex justify-content-left">
+                <div class="col-md-4">
+                    <label>Price:</label>
+                    
+                    <ValidationMessage For="@(() => customerForm.Price)" />
+                </div>
                 <div class="col-md-4">
                     <label>Total:</label>
                     <InputNumber id="total" class="form-control" @bind-Value="customerForm.Total" />
                     <ValidationMessage For="@(() => customerForm.Total)" />
+                </div>
+            </div>
+               
+            
+            <div class="row d-flex justify-content-left" style="margin: auto;">
+                <div class="col-md-8">
+                    <label>Message:</label>
+                    <InputTextArea id="message" class="form-control" @bind-Value="customerForm.Message" />
+                    <ValidationMessage For="@(() => customerForm.Message)" />
                 </div>
             </div>
             <br />
@@ -194,6 +129,7 @@
         </div>
 
         </EditForm>
+    </div>
 </div>
 
 
