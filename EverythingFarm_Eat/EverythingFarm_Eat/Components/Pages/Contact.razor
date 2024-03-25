@@ -33,31 +33,30 @@
 </div>
 
 
-<EditForm Model="@contactForm" OnValidSubmit="@HandleValidSubmit" FormName="ContactForm" style="background-color: plum;">
+<EditForm Model="@contactForm" OnValidSubmit="@HandleValidSubmit" FormName="ContactForm" style="background-color: plum; margin-bottom: 3em;">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center" style="padding-left: 315px;">
         <div class="col-md-3">
-            <div class="form-group">
+            <div class="form-control-group">
                 <label for="firstName">First Name:</label>
                 <InputText id="firstName" class="form-control" @bind-Value="@contactForm.FirstName" placeholder="First Name"/>
                 <ValidationMessage For="@(() => contactForm.FirstName)" />
             </div>
         </div>
-    </div>
+            <div class="col-md-3">
+                <div class="form-control-group">
+                    <label for="lastName">Last Name:</label>
+                    <InputText id="lastName" class="form-control" @bind-Value="@contactForm.LastName" placeholder="Last Name" />
+                    <ValidationMessage For="@(() => contactForm.LastName)" />
+                </div>
+            </div>
+        </div>
+      
     <div class="row d-flex justify-content-center">
         <div class="col-md-3">
-            <div class="form-group">
-                <label for="lastName">Last Name:</label>
-                <InputText id="lastName" class="form-control" @bind-Value="@contactForm.LastName" placeholder="Last Name" />
-                <ValidationMessage For="@(() => contactForm.LastName)" />
-            </div>          
-         </div>
-    </div>  
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-3">
-            <div class="form-group">
+            <div class="form-control-group">
                 <label for="email">Email:</label>
                 <InputText id="email" class="form-control" @bind-Value="@contactForm.Email" placeholder="me@me.com"/>
                 <ValidationMessage For="@(() => contactForm.Email)" />
@@ -66,7 +65,7 @@
     </div>
     <div class="row d-flex justify-content-center">
         <div class="col-md-3">
-            <div class="form-group">
+            <div class="form-control-group">
                 <label for="phone">Phone:</label>
                 <InputText id="phone" class="form-control" @bind-Value="@contactForm.Phone" placeholder="(___)___-____"/>
                 <ValidationMessage For="@(() => contactForm.Phone)" />
@@ -75,7 +74,7 @@
     </div>
     <div class="row d-flex justify-content-center">
         <div class="col-md-3">
-            <div class="form-group">
+            <div class="form-control-group">
                 <label for="reservationDateTime">Reservation Date and Time:</label>
                 
                 <input type="datetime-local" id="reservationDateTime" class="form-control"
@@ -86,8 +85,8 @@
     </div>
     <div class="row d-flex justify-content-center">
         <div class="col-md-3">
-            <div class="form-group">
-                <label>Subject</label>
+            <div class="form-control-group">
+                <label>Subject:</label>
                 <InputText id="subject" class="form-control" @bind-Value="@contactForm.Subject" placeholder="subject"/>
                 <ValidationMessage For="@(() => contactForm.Subject)" />
             </div>
@@ -95,14 +94,14 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-3">
-            <div class="form-group">
+            <div class="form-control-group">
                 <label>Message:</label>
                 <InputTextArea id="message" class="form-control" @bind-Value="@contactForm.Message" placeholder="Enter your message here."/>
                 <ValidationMessage For="@(() => contactForm.Message)" />
             </div>
         </div>
     </div>
-    <div class="d-grid d-md-flex justify-content-md-center">
+    <div class="d-grid d-md-flex justify-content-md-center" style="padding-top: 1em; padding-bottom: 1em;">
         <button type="submit" class="btn btn-primary mx-auto">Submit</button>
     </div>
     
