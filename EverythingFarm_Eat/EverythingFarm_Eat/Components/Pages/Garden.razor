@@ -11,126 +11,138 @@
 <h4 class="text-warning">Order here for seedlings and special gifts!</h4>
 
 
+<div class="container mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-12  justify-content-md-center">
+            <EditForm Model="@customerForm" OnValidSubmit="@HandleValidSubmit" FormName="CustomerForm">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
 
-<div class="row d-flex justify-content-left" style="padding: 1rem;">
-    <div class="col-md-12  justify-content-md-center">
-        <EditForm Model="@customerForm" OnValidSubmit="@HandleValidSubmit" FormName="CustomerForm">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-        
-        <h5 class="text-center" style="padding-top: 1rem;">Order Form</h5>
-        <br />
-        <div class="row" style="margin:auto;">
-                <div class="col-md-4">
-                    <label>First Name:</label>
-                    <InputText id="firstName" class="form-control" @bind-Value="@customerForm.FirstName" placeholder="First Name" />
-                    <ValidationMessage For="@(() => customerForm.FirstName)" />
+                <h5 class="text-center" style="padding-top: 1rem;">Order Form</h5>
+                <br />
+                <div class="row d-flex justify-content-center mx-auto" style="width: 50%">
+                    <div class="col-md-4">
+                        <label for="firstName">First Name:</label>
+                        <InputText id="firstName" class="form-control" @bind-Value="@customerForm.FirstName" placeholder="First Name" />
+                        <ValidationMessage For="@(() => customerForm.FirstName)" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="lastName">Last Name:</label>
+                        <InputText id="lastName" class="form-control" @bind-Value="@customerForm.LastName" placeholder="Last Name" />
+                        <ValidationMessage For="@(() => customerForm.LastName)" />
+                    </div>
                 </div>
 
-                <div class="col-md-4">
-                    <label>Last Name:</label>
-                    <InputText id="lastName" class="form-control" @bind-Value="@customerForm.LastName" placeholder="Last Name" />
-                    <ValidationMessage For="@(() => customerForm.LastName)" />
+                <div class="row d-flex justify-content-center" style="margin: auto;">
+                    <div class="col-md-4">
+                        <label for="email">Email:</label>
+                        <InputText id="email" class="form-control" @bind-Value="@customerForm.Email" placeholder="Email Address" />
+                        <ValidationMessage For="@(() => customerForm.Email)" />
+                    </div>
                 </div>
-        </div>
-            
-            <div class="row d-flex justify-content-left" style="margin: auto;">
-                <div class="col-md-4">
-                    <label>Email:</label>
-                    <InputText id="email" class="form-control" @bind-Value="@customerForm.Email" placeholder="Email Address" />
-                    <ValidationMessage For="@(() => customerForm.Email)" />
+                <div class="row d-flex justify-content-center" style="margin: auto;">
+                    <div class="col-md-4">
+                        <label for="streetAddress">Street Address:</label>
+                        <InputText id="streetAddress" class="form-control" @bind-Value="customerForm.StreetAddress" placeholder="Street Address" />
+                        <ValidationMessage For="@(() => customerForm.StreetAddress)" />
+                    </div>
                 </div>
-            </div>
-            <div class="row d-flex justify-content-left" style="margin: auto;">
-                <div class="col-md-4">
-                    <label>Street Address:</label>
-                    <InputText id="streetAddress" class="form-control" @bind-Value="customerForm.StreetAddress" placeholder="Street Address" />
-                    <ValidationMessage For="@(() => customerForm.StreetAddress)" />
+                <div class="row d-flex justify-content-center" style="margin: auto;">
+                    <div class="col-md-4">
+                        <label for="address2">Address 2:</label>
+                        <InputText id="address2" class="form-control" @bind-Value="customerForm.Address2" placeholder="Address 2" />
+                        <ValidationMessage For="@(() => customerForm.Address2)" />
+                    </div>
                 </div>
-            </div>
-            <div class="row d-flex justify-content-left" style="margin: auto;">
-                <div class="col-md-4">
-                    <label>Address 2:</label>
-                    <InputText id="address2" class="form-control" @bind-Value="customerForm.Address2" placeholder="Address 2" />
-                    <ValidationMessage For="@(() => customerForm.Address2)" />
-                </div>
-            </div>
-            <div class="row d-flex justify-content-left" style="margin: auto;">
-                <div class="col-md-4">
-                    <label>City:</label>
-                    <InputText id="city" class="form-control" @bind-Value="customerForm.City" placeholder="City" />
-                    <ValidationMessage For="@(() => customerForm.City)" />
-                </div>
-                <div class="col-md-4">
-                    <label>State:</label>
-                    <InputSelect id="state" class="form-select" @bind-Value="customerForm.State">
-                        <option>Choose...</option>
-                        @foreach (var states in StateHelper.GetStates())
-                        {
-                            <option value="@states">@states</option>
-                        }
-                    </InputSelect>
-                    <ValidationMessage For="@(() => customerForm.State)" />
-                </div>
-                <div class="col-md-4">
-                    <label>Zip Code:</label>
-                    <InputText id="zipCode" class="form-control" @bind-Value="customerForm.ZipCode" placeholder="Zip Code" />
-                    <ValidationMessage For="@(() => customerForm.ZipCode)" />
-                </div>
-            </div>
-            <br />
-            <div class="row d-flex justify-content-left" style="margin:auto;">
-                <div class="col-md-4">
-                    <label>Seedlings</label>
-                    <InputCheckbox @bind-Value="customerForm.Item" />
-                </div>
-            <div class="row d-flex justify-content-left" style="margin: auto;">
-                <div class="col-md-4">
-                    <label style="margin-left:-10px;">Earrings</label>
-                    <InputCheckbox @bind-Value="customerForm.Item"/>
-                </div>
-            </div>
-                
-            </div>
-            <div class="row d-flex justify-content-left" style="margin: auto;">
-               
-                <div class="col-md-4">
-                    <label>Quantity:</label>
-                    <InputNumber id="quantity" class="form-control" @bind-Value="customerForm.Quantity" />
-                    <ValidationMessage For="@(() => customerForm.Quantity)" />
-                </div>
-                <div class="col-md-4">
-                    <label>Price:</label>
-                    
-                    <ValidationMessage For="@(() => customerForm.Price)" />
-                </div>
-                <div class="col-md-4">
-                    <label>Total:</label>
-                    <InputNumber id="total" class="form-control" @bind-Value="customerForm.Total" />
-                    <ValidationMessage For="@(() => customerForm.Total)" />
-                </div>
-            </div>
-               
-            
-            <div class="row d-flex justify-content-left" style="margin: auto;">
-                <div class="col-md-8">
-                    <label>Message:</label>
-                    <InputTextArea id="message" class="form-control" @bind-Value="customerForm.Message" />
-                    <ValidationMessage For="@(() => customerForm.Message)" />
-                </div>
-            </div>
-            <br />
-        <div class="d-grid d-md-flex justify-content-md-center">
-            <button type="submit" class="btn btn-primary mx-auto">Request</button>
-        </div>
-        <br /><br />
-        <div class="d-grid d-md-flex justify-content-md-center">
-            <img src="/images/The Everything Farm.svg" alt="logo" />
-        </div>
+                <div class="row d-flex justify-content-center" style="margin: auto;">
+                    <div class="col-md-4">
+                        <label for="city">City:</label>
+                        <InputText id="city" class="form-control" @bind-Value="customerForm.City" placeholder="City" />
+                        <ValidationMessage For="@(() => customerForm.City)" />
+                    </div>
+                <div class="row d-flex justify-content-center">
+                        <div class="col-md-4">
+                            <label for="state">State:</label>
+                            <InputSelect id="state" class="form-select" @bind-Value="customerForm.State">
+                                <option>Choose...</option>
+                                @foreach (var states in StateHelper.GetStates())
+                                {
+                                    <option value="@states">@states</option>
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="@(() => customerForm.State)" />
+                        </div>
 
-        </EditForm>
+                </div>
+                   
+                    <div class="col-md-4">
+                        <label for="zipCode">Zip Code:</label>
+                        <InputText id="zipCode" class="form-control" @bind-Value="customerForm.ZipCode" placeholder="Zip Code" />
+                        <ValidationMessage For="@(() => customerForm.ZipCode)" />
+                    </div>
+                </div>
+                <br />
+                <div class="row d-flex justify-content-center" style="margin:auto;">
+                    <div class="col-md-4">
+                        <label>Seedlings</label>
+                        <InputCheckbox @bind-Value="customerForm.Item" />
+                    </div>
+                    <div class="row d-flex justify-content-center" style="margin: auto;">
+                        <div class="col-md-4">
+                            <label style="margin-left:-10px;">Earrings</label>
+                            <InputCheckbox @bind-Value="customerForm.Item" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row d-flex justify-content-center" style="width: 50%; margin: auto;">
+
+                    <div class="col-md-4">
+                        <label for="quantity">Quantity:</label>
+                        <InputNumber id="quantity" class="form-control" @bind-Value="customerForm.Quantity" />
+                        <ValidationMessage For="@(() => customerForm.Quantity)" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Price:</label>
+
+                        <ValidationMessage For="@(() => customerForm.Price)" />
+                    </div>
+                <div class="row d-flex justify-content-center" style="width: 100%;margin:auto; padding-right: 22em;">
+                        <div class="col-md-4">
+                            <label for="total">Total:</label>
+                            <InputNumber id="total" class="form-control" @bind-Value="customerForm.Total" style="margin-right: 2em;" placeholder="$00.00"/>
+                            <ValidationMessage For="@(() => customerForm.Total)" />
+                        </div>
+                    </div>
+
+                </div>
+                 <br /> 
+
+                <div class="row d-flex justify-content-center" style="margin: auto;">
+                    <div class="col-md-8">
+                        <label for="message" style="padding-left: 13em;">Message:</label>
+                        <InputTextArea id="message" class="form-control" @bind-Value="customerForm.Message" style="width:50%;"/>
+                        <ValidationMessage For="@(() => customerForm.Message)" />
+                    </div>
+                </div>
+                <br />
+                <div class="d-grid d-md-flex justify-content-md-center">
+                    <button type="submit" class="btn btn-primary mx-auto">Request</button>
+                </div>
+                <br /><br />
+                <div class="d-grid d-md-flex justify-content-md-center">
+                    <img src="/images/The Everything Farm.svg" alt="logo" />
+                </div>
+
+            </EditForm>
+        </div>
     </div>
+
+
+
 </div>
+
 
 
 

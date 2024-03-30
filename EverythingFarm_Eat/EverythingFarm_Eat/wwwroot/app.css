@@ -4,7 +4,7 @@
 
     html, body {
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        background-image: url('images/everyfarm_home.jpg');
+        background-color: #4800ff;
         background-size: cover;
         background-repeat: no-repeat;
         text-align: center;
@@ -53,7 +53,7 @@
         font-family: 'Segoe UI', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-weight: bold;
         font-size: 36px;
-        color: #9051b1;
+        color: #fff;
         
     }
 
@@ -77,6 +77,8 @@
         h5#contact {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+    
 
    
 
@@ -110,15 +112,19 @@
         
     }
 
-    
-
-
-    .content {
-        padding-top: 1.1rem;
-        
+    .custom_bg {
+        background: #4800ff;
     }
 
-   
+    
+
+        .content {
+        padding-top: 1.1rem;
+        
+        
+    }
+    
+        
 
     .about p {
         margin-top: 50px;
@@ -133,10 +139,12 @@
         background-color: #fff;
         opacity: inherit;
         border-radius: 100vw;
+        
     }
 
     .card-img-top {
         border-radius: 50%;
+        margin-top: 5px;
     }
     
 
@@ -148,6 +156,8 @@
         align-content: center;
         
     }
+
+    
 
 
 
