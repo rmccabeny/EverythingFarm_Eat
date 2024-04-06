@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 namespace EverythingFarm_Eat.Services
 {
     // create the interface to use in the email service
-    public interface IEmailService 
+    public interface IEmailService
     {
         Task SendEmailAsync(string from, string to, string subject, string message);
     }
@@ -15,7 +15,7 @@ namespace EverythingFarm_Eat.Services
         private readonly EmailClient emailClient = emailClient;
 
         // send the email through the service 
-        public async Task SendEmailAsync(string from, string to, string subject, string message) 
+        public async Task SendEmailAsync(string from, string to, string subject, string message)
         {
             var fromEmailAddress = new EmailAddress(from);
             var toEmailAddress = new EmailAddress(to);
